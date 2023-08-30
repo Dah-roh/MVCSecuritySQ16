@@ -28,6 +28,7 @@ public class Users implements UserDetails {
     private Long id;
     private String username;
     private String password;
+    @Enumerated
     private Role role;
 
     @Override
@@ -74,7 +75,7 @@ public class Users implements UserDetails {
     }
 
     public Users(UsersDTO usersDTO) {
-        this.role = Role.valueOf(usersDTO.getRole());
+        this.role = Role.valueOf(usersDTO.getRole().toUpperCase());
         this.password = new BCryptPasswordEncoder().encode(usersDTO.getPassword());
         this.username = usersDTO.getUsername();
     }

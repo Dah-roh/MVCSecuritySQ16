@@ -70,7 +70,7 @@ public class WebConfiguration {
 //
 
 
-    //COMMENT CODE BELOW TO USE MVC SECURITY AUTHORIZATION
+//    COMMENT CODE BELOW TO USE MVC SECURITY AUTHORIZATION
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
@@ -80,7 +80,7 @@ public class WebConfiguration {
                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry
                         -> authorizationManagerRequestMatcherRegistry
                         .requestMatchers(
-                        "/auth/**",
+                        "/auth/welcome/**","/auth/addNewUser/**", "/auth/generateToken/**",
                         "/swagger-ui/**",
                         "/swagger-ui.html",
                         "/swagger-ui/index.html/**",

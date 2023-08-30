@@ -6,6 +6,7 @@ import com.deca.securitysquad16.models.Users;
 import com.deca.securitysquad16.repository.UserRepository;
 import com.deca.securitysquad16.serviceImpl.UserServiceImpl;
 import com.deca.securitysquad16.utils.JwtUtils;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -44,12 +45,14 @@ public class HomeController {
 
     @GetMapping("/user/userProfile/{id}")
     @PreAuthorize("hasAuthority('ROLE_USER')")
+    @SecurityRequirement(name="Bearer Authentication")
     public ResponseEntity<Users> userProfile(@PathVariable Long id) {
         return new ResponseEntity<>(userService.findByUser(id), HttpStatusCode.valueOf(200));
     }
 
     @GetMapping("/admin/adminProfile/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @SecurityRequirement(name="Bearer Authentication")
     public ResponseEntity<Users> adminProfile(@PathVariable Long id) {
         return new ResponseEntity<>(userService.findByUser(id), HttpStatusCode.valueOf(200));
     }
