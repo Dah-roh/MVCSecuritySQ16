@@ -6,6 +6,7 @@ import com.deca.securitysquad16.models.Users;
 import com.deca.securitysquad16.repository.UserRepository;
 import com.deca.securitysquad16.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

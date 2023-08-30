@@ -12,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +20,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class HomeController {
 
-    private final UserServiceImpl service;
+    private  UserServiceImpl userService;
     private final UserRepository userRepository;
     private final JwtUtils jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public HomeController(UserServiceImpl service, UserRepository userRepository, JwtUtils jwtService, AuthenticationManager authenticationManager) {
-        this.service = service;
+    public HomeController(UserServiceImpl userService, UserRepository userRepository, JwtUtils jwtService, AuthenticationManager authenticationManager) {
+        this.userService = userService;
         this.userRepository = userRepository;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
@@ -40,26 +39,26 @@ public class HomeController {
 
     @PostMapping("/addNewUser")
     public ResponseEntity<Users> addNewUser(@RequestBody UsersDTO userDto) {
-        return new ResponseEntity<>(service.addUser(userDto), HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(userService.addUser(userDto), HttpStatusCode.valueOf(200));
     }
 
     @GetMapping("/user/userProfile/{id}")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Users> userProfile(@PathVariable Long id) {
-        return new ResponseEntity<>(service.findByUser(id), HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(userService.findByUser(id), HttpStatusCode.valueOf(200));
     }
 
     @GetMapping("/admin/adminProfile/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Users> adminProfile(@PathVariable Long id) {
-        return new ResponseEntity<>(service.findByUser(id), HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(userService.findByUser(id), HttpStatusCode.valueOf(200));
     }
 
     @PostMapping("/generateToken")
     public ResponseEntity<String> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
-            return new ResponseEntity<>(jwtService.generateToken(service.loadUserByUsername(authRequest.getUsername())), HttpStatusCode.valueOf(200));
+            return new ResponseEntity<>(jwtService.generateToken(userService.loadUserByUsername(authRequest.getUsername())), HttpStatusCode.valueOf(200));
         } else {
             throw new UsernameNotFoundException("invalid user request !");
         }
