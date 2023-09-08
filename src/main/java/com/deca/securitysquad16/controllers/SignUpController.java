@@ -2,11 +2,14 @@ package com.deca.securitysquad16.controllers;
 
 import com.deca.securitysquad16.DTOs.UsersDTO;
 import com.deca.securitysquad16.service.UserService;
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,7 +23,7 @@ public class SignUpController {
     }
 
     @GetMapping("/signup/users")
-    public ModelAndView signUp(){
+    public ModelAndView signUp() throws MessagingException {
         return new ModelAndView("signup").addObject("user", new UsersDTO());
     }
 

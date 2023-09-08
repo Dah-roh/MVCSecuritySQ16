@@ -1,13 +1,159 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8" />
+    <link th:href="@{/styles.css}" rel="stylesheet" type="text/css" href="../static/styles.css">
     <title>Spring Security Example </title>
 </head>
+<style>
+    input {
+        height: 40px;
+        border: 1px solid rgba(33, 51, 79, 0.15);
+        width: 45vw;
+        margin: 1% 0;
+    }
+
+
+    #score-card {
+        margin: 2%;
+        font-size: 28px;
+    }
+
+    #sign-up{
+        width: 50vw;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #sign-up > *{
+        margin-top: 9vh;
+    }
+
+    #main-section {
+        display: flex;
+        flex-direction: row;
+    }
+
+    body {
+        color: #21334F;
+        font-family: Inter, sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    #logo-container {
+        margin-left: 5vw;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    ::placeholder {
+        color: darkgray;
+        padding: 5px;
+        font-weight: 400;
+        font-family: Inter, sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        line-height: normal;
+    }
+
+    #login-text{
+        color: #34A853;
+        margin-left: 5vw;
+        display: flex;
+        flex-direction: column;
+    }
+    #sign-up-image {
+        display: flex;
+        width: 60vw;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #bg-image {
+        height: 130vh;
+        display: inline-block;
+        margin: 0px;
+    }
+
+    #logo1 {
+        position: absolute;
+        margin: 10px 10px;
+        z-index: 2;
+    }
+
+    #logo2 {
+        z-index: 1;
+    }
+
+    #sign-up-form {
+        margin-left: 5vw;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    #sign-up-button {
+        background: radial-gradient(circle at 10% 20%, rgb(4, 159, 108) 0%, rgb(194, 254, 113) 90.1%);    display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        border: 0;
+        width: 100%;
+        align-self: flex-start;
+    }
+
+    #sign-up-text {
+        font-size: 32px;
+    }
+
+    #sign-up-button-text {
+        color: #ffff;
+        font-size: 16px;
+    }
+    #sign-up-text, #sign-up-button {
+        display: flex;
+        flex-direction: column;
+        margin: 5% 0;
+    }
+</style>
 <body>
-<form th:action="@{/signup/users}" method="post" th:object="${user}">
-    <div><label> User Name : <input type="text" name="username" th:field="*{username}"/> </label></div>
-    <div><label> Password: <input type="password" name="password" th:field="*{password}"/> </label></div>
-    <div><input type="submit" value="Sign Up"/></div>
-</form>
+<main>
+    <section id="main-section">
+        <div id="sign-up">
+            <div id="sign-up-logo"></div>
+            <div id="logo-container">
+                <img id="logo1" src="/images/line-logo.svg" th:src="@{https://res.cloudinary.com/gadibia/image/upload/v1694175878/images/line-logo_anvfhy.svg}">
+                <img id="logo2" src="/images/green-circle.svg" th:src="@{https://res.cloudinary.com/gadibia/image/upload/v1694175877/images/green-circle_fncyem.svg}"/>
+                <div id="score-card">Scorecard</div>
+            </div>
+            <div id="login-text">Go Back to Login</div>
+            <div id="sign-up-form">
+                <form method="post" >
+                    <div id="sign-up-text">Sign Up</div>
+                    <div id="firstname"><div>  FirstName: </div><input type="text" name="username" placeholder="FirstName"/> </div>
+                    <div id="lastname"><div>  LastName: </div><input type="text" name="username" placeholder="LastName"/> </div>
+                    <div id="email"><div>  Email: </div><input type="text" name="username"  placeholder="Email"/></div>
+                    <div id="password"><div> Password: </div><input type="password" name="password"  placeholder="Password"/></div>
+                    <div id="forgot-password"><div>Confirm Password: </div><input type="text" name="username" placeholder="Confirm Password" /> </div>
+                    <div><button id ="sign-up-button" type="submit"><div id="sign-up-button-text"> Sign Up</div></button></div>
+                </form>
+            </div>
+        </div>
+        <div id="sign-up-image">
+            <div></div>
+            <img id="bg-image" src="/images/img.png" th:src="@{https://res.cloudinary.com/gadibia/image/upload/v1694175817/images/9XArNXnYCeDEK29GATq6913N8izBanJkZrUxMce1l4O4GFlZUQN8AybmidDXZdXnlghm2xFyhSLtziDH7khlDBmREvRYeDNmTGEy4VX92vKCZhooycIBkpzXQzqnziOf_v09ostu1vxQw_gnJZ6X4Kd9VL3cM3vTGF3e9OVxNNwd_mGSjXg9Pb1dTV_uTz_kGluhJcQix92edvS_P6I_lxva0g.png}">
+        </div>
+    </section>
+</main>
+<footer>
+</footer>
 </body>
 </html>
