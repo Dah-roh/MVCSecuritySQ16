@@ -59,42 +59,42 @@ public class WebConfiguration {
     }
 
     //REMOVE COMMENT FROM CODE BELOW TO USE MVC SECURITY AUTHORIZATION
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//        return httpSecurity.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry
-//                -> authorizationManagerRequestMatcherRegistry.requestMatchers("/", "/login", "/signup/**").permitAll().anyRequest().authenticated())
-//                .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.loginPage("/login"))
-//                .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout"))
-//                .build();
-//    }
-//
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry
+                -> authorizationManagerRequestMatcherRegistry.requestMatchers("/", "/login", "/signup/**").permitAll().anyRequest().authenticated())
+                .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.loginPage("/login"))
+                .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout"))
+                .build();
+    }
+
 
 
 //    COMMENT CODE BELOW TO USE MVC SECURITY AUTHORIZATION
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
-                //disables Cross Site Request Forgery and Cross Origin Resource Sharing
-               .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry
-                        -> authorizationManagerRequestMatcherRegistry
-                        .requestMatchers(
-                        "/auth/welcome/**","/auth/addNewUser/**", "/auth/generateToken/**",
-                        "/swagger-ui/**",
-                        "/swagger-ui.html",
-                        "/swagger-ui/index.html/**",
-                        "/v3/api-docs/**")
-                               .permitAll()
-                               .anyRequest()
-                               .authenticated()
-                       //Authorizes All requests to these endpoints without
-                //authentication
-                        )
-                .authenticationProvider(authenticationProvider())//inject the authentication provider we configured
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                //since JWT will handle it
-                .build();
-    }
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+//        return httpSecurity
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .cors(AbstractHttpConfigurer::disable)
+//                //disables Cross Site Request Forgery and Cross Origin Resource Sharing
+//               .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry
+//                        -> authorizationManagerRequestMatcherRegistry
+//                        .requestMatchers(
+//                        "/auth/welcome/**","/auth/addNewUser/**", "/auth/generateToken/**",
+//                        "/swagger-ui/**",
+//                        "/swagger-ui.html",
+//                        "/swagger-ui/index.html/**",
+//                        "/v3/api-docs/**")
+//                               .permitAll()
+//                               .anyRequest()
+//                               .authenticated()
+//                       //Authorizes All requests to these endpoints without
+//                //authentication
+//                        )
+//                .authenticationProvider(authenticationProvider())//inject the authentication provider we configured
+//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+//                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                //since JWT will handle it
+//                .build();
+//    }
 }
