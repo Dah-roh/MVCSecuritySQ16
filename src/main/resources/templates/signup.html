@@ -136,12 +136,12 @@
             </div>
             <div id="login-text">Go Back to Login</div>
             <div id="sign-up-form">
-                <form method="post" >
+                <form method="post" th:action="@{/signup/users}" th:object="${user}">
                     <div id="sign-up-text">Sign Up</div>
                     <div id="firstname"><div>  FirstName: </div><input type="text" name="username" placeholder="FirstName"/> </div>
                     <div id="lastname"><div>  LastName: </div><input type="text" name="username" placeholder="LastName"/> </div>
-                    <div id="email"><div>  Email: </div><input type="text" name="username"  placeholder="Email"/></div>
-                    <div id="password"><div> Password: </div><input type="password" name="password"  placeholder="Password"/></div>
+                    <div id="email"><div>  Email: </div><input type="text" name="username"  placeholder="Email" th:field="*{username}"/></div>
+                    <div id="password"><div> Password: </div><input type="password" name="password"  placeholder="Password" th:field="*{password}"/></div>
                     <div id="forgot-password"><div>Confirm Password: </div><input type="text" name="username" placeholder="Confirm Password" /> </div>
                     <div><button id ="sign-up-button" type="submit"><div id="sign-up-button-text"> Sign Up</div></button></div>
                 </form>
