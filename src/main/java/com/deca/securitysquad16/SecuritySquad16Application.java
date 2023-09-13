@@ -3,7 +3,9 @@ package com.deca.securitysquad16;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Profile;
 
+@Profile("dev")
 @SpringBootApplication
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class SecuritySquad16Application {
